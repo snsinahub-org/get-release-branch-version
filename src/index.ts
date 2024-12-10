@@ -38,23 +38,14 @@ async function run() {
             const major = parseInt(releaseInfo[1], 10);
             const minor = parseInt(releaseInfo[2], 10);
             const patch = releaseInfo[3] ? parseInt(releaseInfo[3], 10) : 0; // Default to 0 if not available
-
+            core.setOutput("major", major);
+            core.setOutput("minor", minor);
+            core.setOutput("patch", patch);
+            core.setOutput("manifestSafeVersionString", `${major.toString().padStart(2, "0")}.${minor.toString().padStart(2, "0")}.${patch.toString().padStart(2, "0")}`);
             console.log(`Major: ${major}, Minor: ${minor}, Patch: ${patch}`);
         } else {
             console.log('No match found. Ensure the branch name follows the format: release-1.2 or release-1.2.3');
         }
-        
-        // if (releaseInfo){
-        //     const version = await getVersion(releaseInfo);
-        //     console.log("version: ", version);
-        //     core.setOutput("major", version.major);
-        //     core.setOutput("minor", version.minor);
-        //     core.setOutput("patch", version.patch);
-        //     core.setOutput("manifestSafeVersionString", version.manifestSafeVersionString);
-        // }
-        // else{
-        //     core.setFailed(`The branch name does not match the pattern 'release/nn.nn.nn' or 'release-nn.nn.nn', received ${branchName}`);
-        // }
     } catch (error: any) {
         core.setFailed(error);
     }
