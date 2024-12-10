@@ -111,7 +111,7 @@ function run() {
                     core.setOutput("minor", minor);
                     core.setOutput("patch", patch);
                     core.setOutput("manifestSafeVersionString", "".concat(major.toString().padStart(2, "0"), ".").concat(minor.toString().padStart(2, "0"), ".").concat(patch.toString().padStart(2, "0")));
-                    console.log("Major: ".concat(major, ", Minor: ").concat(minor, ", Patch: ").concat(patch));
+                    core.setOutput("versionString", "".concat(major, ".").concat(minor, ".").concat(patch));
                 }
                 else {
                     console.log('No match found. Ensure the branch name follows the format: release-1.2 or release-1.2.3');

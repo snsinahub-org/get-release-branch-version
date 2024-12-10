@@ -10,6 +10,8 @@ outputs:
     description: 'The patch version number such as 3 in release/1.2.3'
   manifestSafeVersionString:
     description: 'A version string that is save to use in Dnn manifests'
+  versionString:
+    description: 'The version string such as 1.2.3 in release/1.2.3'
 runs:
   using: 'node20'
   main: './dist/index.js'

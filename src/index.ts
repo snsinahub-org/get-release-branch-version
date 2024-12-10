@@ -42,7 +42,7 @@ async function run() {
             core.setOutput("minor", minor);
             core.setOutput("patch", patch);
             core.setOutput("manifestSafeVersionString", `${major.toString().padStart(2, "0")}.${minor.toString().padStart(2, "0")}.${patch.toString().padStart(2, "0")}`);
-            console.log(`Major: ${major}, Minor: ${minor}, Patch: ${patch}`);
+            core.setOutput("versionString", `${major}.${minor}.${patch}`);
         } else {
             console.log('No match found. Ensure the branch name follows the format: release-1.2 or release-1.2.3');
         }
