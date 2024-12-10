@@ -34,7 +34,7 @@ jobs:
           PATCH: ${{ steps.branchVersion.outputs.patch }}
           MANIFEST_SAFE_VERSION_STRING: ${{ steps.branchVersion.outputs.manifestSafeVersionString }}
           VERSION_STRING: ${{ steps.branchVersion.outputs.versionString }}
-        run: "echo major: $MAJOR minor: $MINOR patch: $PATCH manifestSafeVersionString: $MANIFEST_SAFE_VERSION_STRING"
+        run: "echo major: $MAJOR minor: $MINOR patch: $PATCH manifestSafeVersionString: $MANIFEST_SAFE_VERSION_STRING versionString: $VERSION_STRING"
 ```
 
 Obviously replace the **Dump step** with something more useful for your process.
