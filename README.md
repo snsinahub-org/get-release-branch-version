@@ -25,16 +25,26 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - uses: valadas/get-release-branch-version@v1
+      - uses: snsinahub-org/get-release-branch-version@v2.0.0
         id: branchVersion
       - name: Dump the version info
+        run: | 
+          echo "major: $MAJOR minor: $MINOR patch: $PATCH manifestSafeVersionString: $MANIFEST_SAFE_VERSION_STRING versionString: $VERSION_STRING"
+          echo "<table>" >> $GITHUB_STEP_SUMMARY
+          echo "<tr><th>Key</th><th>Value</th></tr>" >> $GITHUB_STEP_SUMMARY
+          echo "<tr><td>Major</td><td>$MAJOR</td></tr>" >> $GITHUB_STEP_SUMMARY
+          echo "<tr><td>Minor</td><td>$MINOR</td></tr>" >> $GITHUB_STEP_SUMMARY
+          echo "<tr><td>Patch</td><td>$PATCH</td></tr>" >> $GITHUB_STEP_SUMMARY
+          echo "<tr><td>Manifest Safe Version String</td><td>$MANIFEST_SAFE_VERSION_STRING</td></tr>" >> $GITHUB_STEP_SUMMARY
+          echo "<tr><td>Version String</td><td>$VERSION_STRING</td></tr>" >> $GITHUB_STEP_SUMMARY
+          echo "</table>" >> $GITHUB_STEP_SUMMARY
         env:
           MAJOR: ${{ steps.branchVersion.outputs.major }}
           MINOR: ${{ steps.branchVersion.outputs.minor }}
           PATCH: ${{ steps.branchVersion.outputs.patch }}
           MANIFEST_SAFE_VERSION_STRING: ${{ steps.branchVersion.outputs.manifestSafeVersionString }}
           VERSION_STRING: ${{ steps.branchVersion.outputs.versionString }}
-        run: "echo major: $MAJOR minor: $MINOR patch: $PATCH manifestSafeVersionString: $MANIFEST_SAFE_VERSION_STRING versionString: $VERSION_STRING"
+
 ```
 
 Obviously replace the **Dump step** with something more useful for your process.
