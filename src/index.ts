@@ -32,6 +32,7 @@ async function run() {
         // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})\.(\d{1,2})$/);
         const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
         const releaseInfo = branchName.match(regex);
+        console.log("releaseInfo: ", releaseInfo);
 
         if (releaseInfo) {
             const major = parseInt(releaseInfo[1], 10);
