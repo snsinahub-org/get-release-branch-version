@@ -28,19 +28,23 @@ async function run() {
         }
 
         // Grab the branch version
-        const branchName: string = github.context.payload.ref;
-        const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})\.(\d{1,2})$/);
-        const releaseInfo = branchName.match(regex)
-        if (releaseInfo){
-            const version = await getVersion(releaseInfo);
-            console.log("version: ", version);
-            core.setOutput("major", version.major);
-            core.setOutput("minor", version.minor);
-            core.setOutput("patch", version.patch);
-            core.setOutput("manifestSafeVersionString", version.manifestSafeVersionString);
-        }
-        else{
-            core.setFailed(`The branch name does not match the pattern 'release/nn.nn.nn' or 'release-nn.nn.nn', received ${branchName}`);
+        const branchName: string = github.context.payload.ref;        
+        // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})\.(\d{1,2})$/);
+        const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
+        const releaseInfo = branchName.match(regex);
+        console.log("releaseInfo: ", releaseInfo);
+
+        if (releaseInfo) {
+            const major = parseInt(releaseInfo[1], 10);
+            const minor = parseInt(releaseInfo[2], 10);
+            const patch = releaseInfo[3] ? parseInt(releaseInfo[3], 10) : 0; // Default to 0 if not available
+            core.setOutput("major", major);
+            core.setOutput("minor", minor);
+            core.setOutput("patch", patch);
+            core.setOutput("manifestSafeVersionString", `${major.toString().padStart(2, "0")}.${minor.toString().padStart(2, "0")}.${patch.toString().padStart(2, "0")}`);
+            core.setOutput("versionString", `${major}.${minor}.${patch}`);
+        } else {
+            console.log('No match found. Ensure the branch name follows the format: release-1.2 or release-1.2.3');
         }
     } catch (error: any) {
         core.setFailed(error);
