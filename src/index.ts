@@ -2,7 +2,7 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 
 const getVersion = async (version: RegExpMatchArray): Promise<Version> => {
-    
+    console.log("version:", version);
     return {
         major: parseInt(version[1]),
         minor: parseInt(version[2]),
@@ -16,13 +16,16 @@ const getVersion = async (version: RegExpMatchArray): Promise<Version> => {
 
 async function run() {
     try {
-        const event = github.context.eventName;        
-        if (event !== "create" && event !== "push" && event !== "pull_request") {            
+        const event = github.context.eventName;
+        console.log("context: ", JSON.stringify(github.context.payload, null, 2));
+        if (event !== "create" && event !== "push" && event !== "pull_request") {
+            console.log("event: ", event);
             core.setFailed("This action is only meant to be run on create, push and pull_request");
             return;
         }
         const refType = github.context.payload.ref_type;
-                
+        
+        
         // Grab the branch version
         let branchName: string = ""
         if (event === "push" || event === "create") {
@@ -30,10 +33,14 @@ async function run() {
         } else if (event === "pull_request") {
             branchName = github.context.payload.pull_request?.base.ref || "";
         }
-                
-        const regex = new RegExp(/^(?:refs\/heads\/)?release[-\/](\d{1,5})\.(\d{1,5})(?:\.(\d{1,5}))?$/);        
-        const releaseInfo = branchName.match(regex);
         
+        // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})\.(\d{1,2})$/);
+        // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
+        const regex = new RegExp(/^(?:refs\/heads\/)?release[-\/](\d{1,5})\.(\d{1,5})(?:\.(\d{1,5}))?$/);
+        console.log("regex: ", regex);
+        console.log("branchName: ", branchName);
+        const releaseInfo = branchName.match(regex);
+        console.log("releaseInfo: ", releaseInfo);
 
         if (releaseInfo) {
             const major = parseInt(releaseInfo[1], 10);
