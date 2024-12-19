@@ -90,13 +90,13 @@ function run() {
         return __generator(this, function (_a) {
             try {
                 event_1 = github.context.eventName;
+                console.log("context: ", JSON.stringify(github.context.payload, null, 2));
                 if (event_1 !== "create" && event_1 !== "push" && event_1 !== "pull_request") {
                     console.log("event: ", event_1);
                     core.setFailed("This action is only meant to be run on create, push and pull_request");
                     return [2 /*return*/];
                 }
                 refType = github.context.payload.ref_type;
-                console.log("context: ", JSON.stringify(github.context.payload, null, 2));
                 branchName = github.context.payload.ref;
                 regex = new RegExp(/^(?:refs\/heads\/)?release[-\/](\d{1,5})\.(\d{1,5})(?:\.(\d{1,5}))?$/);
                 console.log("regex: ", regex);

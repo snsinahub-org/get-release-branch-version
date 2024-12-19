@@ -17,13 +17,14 @@ const getVersion = async (version: RegExpMatchArray): Promise<Version> => {
 async function run() {
     try {
         const event = github.context.eventName;
+        console.log("context: ", JSON.stringify(github.context.payload, null, 2));
         if (event !== "create" && event !== "push" && event !== "pull_request") {
             console.log("event: ", event);
             core.setFailed("This action is only meant to be run on create, push and pull_request");
             return;
         }
         const refType = github.context.payload.ref_type;
-        console.log("context: ", JSON.stringify(github.context.payload, null, 2));
+        
         // if (refType !== "branch"){
         //     console.log("refType: ", refType);
         //     core.setFailed("This action is only meant to be run on the creation of a new branch");
