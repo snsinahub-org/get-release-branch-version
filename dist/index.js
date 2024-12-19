@@ -73,7 +73,6 @@ var core = __importStar(require("@actions/core"));
 var github = __importStar(require("@actions/github"));
 var getVersion = function (version) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        console.log("version:", version);
         return [2 /*return*/, {
                 major: parseInt(version[1]),
                 minor: parseInt(version[2]),
@@ -91,9 +90,7 @@ function run() {
         return __generator(this, function (_b) {
             try {
                 event_1 = github.context.eventName;
-                console.log("context: ", JSON.stringify(github.context.payload, null, 2));
                 if (event_1 !== "create" && event_1 !== "push" && event_1 !== "pull_request") {
-                    console.log("event: ", event_1);
                     core.setFailed("This action is only meant to be run on create, push and pull_request");
                     return [2 /*return*/];
                 }
@@ -106,10 +103,7 @@ function run() {
                     branchName = ((_a = github.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.base.ref) || "";
                 }
                 regex = new RegExp(/^(?:refs\/heads\/)?release[-\/](\d{1,5})\.(\d{1,5})(?:\.(\d{1,5}))?$/);
-                console.log("regex: ", regex);
-                console.log("branchName: ", branchName);
                 releaseInfo = branchName.match(regex);
-                console.log("releaseInfo: ", releaseInfo);
                 if (releaseInfo) {
                     major = parseInt(releaseInfo[1], 10);
                     minor = parseInt(releaseInfo[2], 10);
