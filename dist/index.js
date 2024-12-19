@@ -90,7 +90,7 @@ function run() {
         return __generator(this, function (_a) {
             try {
                 event_1 = github.context.eventName;
-                if (event_1 !== "create") {
+                if (event_1 !== "create" && event_1 !== "push" && event_1 !== "pull_request") {
                     console.log("event: ", event_1);
                     core.setFailed("This action is only meant to be run on create, push and pull_request");
                     return [2 /*return*/];

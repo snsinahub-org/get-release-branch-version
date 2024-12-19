@@ -17,7 +17,7 @@ const getVersion = async (version: RegExpMatchArray): Promise<Version> => {
 async function run() {
     try {
         const event = github.context.eventName;
-        if (event !== "create"){
+        if (event !== "create" && event !== "push" && event !== "pull_request") {
             console.log("event: ", event);
             core.setFailed("This action is only meant to be run on create, push and pull_request");
             return;
