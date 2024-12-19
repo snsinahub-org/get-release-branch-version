@@ -24,11 +24,11 @@ async function run() {
         }
         const refType = github.context.payload.ref_type;
         console.log("context: ", JSON.stringify(github.context, null, 2));
-        if (refType !== "branch"){
-            console.log("refType: ", refType);
-            core.setFailed("This action is only meant to be run on the creation of a new branch");
-            return;
-        }
+        // if (refType !== "branch"){
+        //     console.log("refType: ", refType);
+        //     core.setFailed("This action is only meant to be run on the creation of a new branch");
+        //     return;
+        // }
 
         // Grab the branch version
         const branchName: string = github.context.payload.ref;        
