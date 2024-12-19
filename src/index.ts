@@ -33,7 +33,8 @@ async function run() {
         // Grab the branch version
         const branchName: string = github.context.payload.ref;        
         // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})\.(\d{1,2})$/);
-        const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
+        // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
+        const regex = new RegExp(/^(?:refs\/heads\/)?release[-\/](\d{1,5})\.(\d{1,5})(?:\.(\d{1,5}))?$/);
         console.log("regex: ", regex);
         console.log("branchName: ", branchName);
         const releaseInfo = branchName.match(regex);
