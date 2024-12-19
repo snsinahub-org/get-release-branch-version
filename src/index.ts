@@ -32,7 +32,13 @@ async function run() {
         // }
 
         // Grab the branch version
-        const branchName: string = github.context.payload.ref;        
+        let branchName: string = ""
+        if (event === "push" || event === "create") {
+            branchName = github.context.payload.ref;
+        } else if (event === "pull_request") {
+            branchName = github.context.payload.pull_request?.base.ref || "";
+        }
+        
         // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})\.(\d{1,2})$/);
         // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
         const regex = new RegExp(/^(?:refs\/heads\/)?release[-\/](\d{1,5})\.(\d{1,5})(?:\.(\d{1,5}))?$/);
