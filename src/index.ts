@@ -34,6 +34,8 @@ async function run() {
         const branchName: string = github.context.payload.ref;        
         // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})\.(\d{1,2})$/);
         const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
+        console.log("regex: ", regex);
+        console.log("branchName: ", branchName);
         const releaseInfo = branchName.match(regex);
         console.log("releaseInfo: ", releaseInfo);
 

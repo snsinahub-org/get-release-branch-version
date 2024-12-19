@@ -99,6 +99,8 @@ function run() {
                 console.log("context: ", JSON.stringify(github.context.payload, null, 2));
                 branchName = github.context.payload.ref;
                 regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
+                console.log("regex: ", regex);
+                console.log("branchName: ", branchName);
                 releaseInfo = branchName.match(regex);
                 console.log("releaseInfo: ", releaseInfo);
                 if (releaseInfo) {
