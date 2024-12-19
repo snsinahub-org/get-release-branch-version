@@ -24,6 +24,7 @@ async function run() {
         }
         const refType = github.context.payload.ref_type;
         if (refType !== "branch"){
+            console.log("refType: ", refType);
             core.setFailed("This action is only meant to be run on the creation of a new branch");
             return;
         }
