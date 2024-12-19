@@ -91,7 +91,8 @@ function run() {
             try {
                 event_1 = github.context.eventName;
                 if (event_1 !== "create") {
-                    core.setFailed("This action is only meant to be run on create");
+                    console.log("event: ", event_1);
+                    core.setFailed("This action is only meant to be run on create, push and pull_request");
                     return [2 /*return*/];
                 }
                 refType = github.context.payload.ref_type;
