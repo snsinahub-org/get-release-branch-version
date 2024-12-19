@@ -96,7 +96,7 @@ function run() {
                     return [2 /*return*/];
                 }
                 refType = github.context.payload.ref_type;
-                console.log("context: ", JSON.stringify(github.context, null, 2));
+                console.log("context: ", JSON.stringify(github.context.payload, null, 2));
                 branchName = github.context.payload.ref;
                 regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
                 releaseInfo = branchName.match(regex);
