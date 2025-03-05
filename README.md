@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - uses: snsinahub-org/get-release-branch-version@v3.0.0
+      - uses: snsinahub-org/get-release-branch-version@v3.0.1
         id: branchVersion
       - name: Dump the version info
         run: | 
