@@ -26,9 +26,9 @@
   "homepage": "https://github.com/valadas/get-release-branch-version#readme",
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^2.1.1"
+    "@actions/github": "^6.0.0"
   },
-  "devDependencies": {
+"devDependencies": {
     "@types/node": "^22.10.1",
     "typescript": "^5.7.2"
   }
